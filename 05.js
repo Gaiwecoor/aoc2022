@@ -2,6 +2,20 @@ const fs = require("fs");
 const stacks = fs.readFileSync("./inputs/05a.txt", "utf8").trim().split("\n");
 const moves = fs.readFileSync("./inputs/05b.txt", "utf8").trim().split("\n").map(move => /move (\d+) from (\d+) to (\d+)/.exec(move));
 
+/*****
+** Note: This involves some manipulation of the input, splitting it into two parts.
+** The first part includes transposing the stacks into a representation of one stack per line (bottom first):
+**   ZN
+**   MCD
+**   P
+**
+** The second part includes the various moves:
+**   move 1 from 2 to 1
+**   move 3 from 1 to 3
+**   move 2 from 2 to 1
+**   move 1 from 1 to 2
+*****/
+
 class Stack extends Array {
   constructor(items) {
     super(...items);
